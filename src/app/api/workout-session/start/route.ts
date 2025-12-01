@@ -39,22 +39,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Create exercises array with sets
-    const sessionExercises = exercises.map((ex: any) => ({
-      exerciseId: ex.id || ex._id,
-      name: ex.name,
-      targetSets: ex.sets || 3,
-      targetReps: ex.reps || 10,
-      category: ex.type || ex.category,
-      equipment: ex.equipment,
-      sets: Array.from({ length: ex.sets || 3 }, (_, i) => ({
-        setNumber: i + 1,
-        reps: 0,
-        weight: 0,
-        completed: false,
-        restSeconds: ex.restSeconds || 60,
-      })),
-      status: 'pending',
-    }));
+    const sessionExercises = exercises.map((ex: any) => {
+      const exercise: any = {
+        exerciseId: ex.id || ex._id,
+        name: ex.name,
+        targetSets: ex.sets || 3,
+        targetReps: ex.reps || 10,
+        category: ex.type || ex.category,
+        equipment: ex.equipment,
+        sets: Array.from({ length: ex.sets || 3 }, (_, i) => ({
+          setNumber: i + 1,
+          reps: 0,
+          weight: 0,
+          completed: false,
+          restSeconds: ex.restSeconds || 60,
+        })),
+        status: 'pending',
+      };
+      return exercise;
+    });
 
     // Mark first exercise as active
     if (sessionExercises.length > 0) {
