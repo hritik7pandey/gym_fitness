@@ -2,12 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import DynamicNavBar from '@/components/navigation/DynamicNavBar';
-import ParallaxHero from '@/components/landing/ParallaxHero';
-import AnimatedFeatures from '@/components/landing/AnimatedFeatures';
-import AnimatedPricingCards from '@/components/landing/AnimatedPricingCards';
-import TestimonialCarousel from '@/components/landing/TestimonialCarousel';
 import MotionButton from '@/components/ui/MotionButton';
-import { motion } from '@/lib/motion';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -139,108 +134,135 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen ios-aurora-bg">
       {/* Navigation */}
       <DynamicNavBar transparent />
 
       {/* Hero Section */}
-      <ParallaxHero />
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(122,167,255,0.15) 0%, rgba(158,245,194,0.1) 50%, rgba(185,215,255,0.12) 100%)' }} />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-[#1C1C1E] mb-6">
+            Transform Your Body,<br />Elevate Your Life
+          </h1>
+          <p className="text-xl md:text-2xl text-[#1C1C1E]/70 mb-8 max-w-3xl mx-auto">
+            India's #1 AI-powered fitness platform with personalized workouts and nutrition plans
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <MotionButton variant="primary" size="lg">Start Free Trial →</MotionButton>
+            <MotionButton variant="secondary" size="lg">Watch Demo</MotionButton>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
-      <AnimatedFeatures 
-        features={features}
-        title="Built for Results"
-        subtitle="Everything you need to achieve your fitness goals"
-      />
+      <section id="features" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-4">Built for Results</h2>
+            <p className="text-xl text-[#1C1C1E]/70">Everything you need to achieve your fitness goals</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, index) => (
+              <div key={index} className="p-6 rounded-3xl" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.5)' }}>
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-bold text-[#1C1C1E] mb-2">{feature.title}</h3>
+                <p className="text-[#1C1C1E]/70">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section id="workouts" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { label: 'Active Members', value: '50K+' },
               { label: 'Workouts Completed', value: '2M+' },
               { label: 'Kg Lost', value: '100K+' },
               { label: 'Success Rate', value: '95%' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                style={{ textAlign: 'center' }}
-              >
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-gray-600 font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
+            ].map((stat) => (
+              <div key={stat.label} className="text-center p-6 rounded-3xl" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.5)' }}>
+                <div className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-2">{stat.value}</div>
+                <div className="text-[#1C1C1E]/60 font-medium">{stat.label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <AnimatedPricingCards 
-        tiers={pricingTiers}
-        title="Simple, Transparent Pricing"
-        subtitle="Choose the plan that fits your fitness journey"
-      />
+      <section id="pricing" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-4">Simple, Transparent Pricing</h2>
+            <p className="text-xl text-[#1C1C1E]/70">Choose the plan that fits your fitness journey</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {pricingTiers.map((tier) => (
+              <div key={tier.name} className="p-8 rounded-3xl relative" style={{ background: tier.popular ? 'rgba(122,167,255,0.2)' : 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)', border: tier.popular ? '2px solid rgba(122,167,255,0.4)' : '1px solid rgba(255,255,255,0.5)' }}>
+                {tier.popular && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>}
+                <div className="text-5xl mb-4">{tier.icon}</div>
+                <h3 className="text-2xl font-bold text-[#1C1C1E] mb-2">{tier.name}</h3>
+                <p className="text-[#1C1C1E]/70 mb-4">{tier.description}</p>
+                <div className="mb-6">
+                  <span className="text-4xl font-bold text-[#1C1C1E]">{tier.price}</span>
+                  <span className="text-[#1C1C1E]/60">{tier.period}</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-[#1C1C1E]/80">
+                      <span className="text-green-500">✓</span> {feature}
+                    </li>
+                  ))}
+                </ul>
+                <MotionButton variant={tier.popular ? 'primary' : 'secondary'} className="w-full">{tier.cta}</MotionButton>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Testimonials Section */}
-      <TestimonialCarousel 
-        testimonials={testimonials}
-        autoPlay
-        interval={5000}
-      />
+      <section id="testimonials" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-4">Loved by Thousands</h2>
+            <p className="text-xl text-[#1C1C1E]/70">See what our members have to say</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {testimonials.slice(0, 4).map((testimonial, index) => (
+              <div key={index} className="p-6 rounded-3xl" style={{ background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.5)' }}>
+                <div className="flex items-center gap-4 mb-4">
+                  <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full" />
+                  <div>
+                    <h4 className="font-bold text-[#1C1C1E]">{testimonial.name}</h4>
+                    <p className="text-sm text-[#1C1C1E]/60">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-[#1C1C1E]/80 mb-3">{testimonial.content}</p>
+                <div className="flex gap-1">
+                  {[...Array(testimonial.rating)].map((_, i) => <span key={i} className="text-yellow-500">★</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <section className="relative py-32 overflow-hidden">
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700" />
-        
-        {/* Animated orbs */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-
+      <section className="relative py-20">
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(122,167,255,0.15) 0%, rgba(158,245,194,0.1) 50%, rgba(185,215,255,0.12) 100%)' }} />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Ready to Transform Your Life?
-            </h2>
-            <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-2xl mx-auto">
-              Join 50,000+ Indians who are already achieving their fitness goals with Fitsense
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <MotionButton
-                variant="secondary"
-                size="lg"
-                className="shadow-2xl"
-              >
-                Start Free Trial →
-              </MotionButton>
-              <MotionButton
-                variant="ghost"
-                size="lg"
-                className="text-white hover:bg-white/10"
-              >
-                Watch Demo
-              </MotionButton>
-            </div>
-
-            <p className="text-blue-200 mt-8">
-              No credit card required • 7-day free trial • Cancel anytime
-            </p>
-          </motion.div>
+          <h2 className="text-4xl md:text-6xl font-bold text-[#1C1C1E] mb-6">Ready to Transform Your Life?</h2>
+          <p className="text-xl md:text-2xl text-[#1C1C1E]/70 mb-12 max-w-2xl mx-auto">Join 50,000+ Indians who are already achieving their fitness goals with Fitsense</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <MotionButton variant="primary" size="lg">Start Free Trial →</MotionButton>
+            <MotionButton variant="secondary" size="lg">Watch Demo</MotionButton>
+          </div>
+          <p className="text-[#1C1C1E]/50 mt-8">No credit card required • 7-day free trial • Cancel anytime</p>
         </div>
       </section>
 
@@ -318,6 +340,22 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/919876543210?text=Hi%20Fitsense%2C%20I%20want%20to%20know%20more%20about%20membership"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-24 lg:bottom-8 right-6 z-50"
+      >
+        <div className="relative">
+          <div className="relative w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white shadow-lg">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </div>
+        </div>
+      </a>
     </div>
   );
 }
