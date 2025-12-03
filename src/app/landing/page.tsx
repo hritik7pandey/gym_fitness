@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import DynamicNavBar from '@/components/navigation/DynamicNavBar';
 import MotionButton from '@/components/ui/MotionButton';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -149,8 +151,8 @@ export default function LandingPage() {
             India's #1 AI-powered fitness platform with personalized workouts and nutrition plans
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <MotionButton variant="primary" size="lg">Start Free Trial →</MotionButton>
-            <MotionButton variant="secondary" size="lg">Watch Demo</MotionButton>
+            <MotionButton variant="primary" size="lg" onClick={() => router.push('/auth/signup')}>Start Free Trial →</MotionButton>
+            <MotionButton variant="secondary" size="lg" onClick={() => alert('🎥 Watch Demo\n\nSee how Fitsense helps you:\n• Track workouts & progress\n• Get personalized meal plans\n• Connect with trainers\n• Achieve your fitness goals\n\nDemo video coming soon!')}>Watch Demo</MotionButton>
           </div>
         </div>
       </section>
@@ -218,7 +220,7 @@ export default function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                <MotionButton variant={tier.popular ? 'primary' : 'secondary'} className="w-full">{tier.cta}</MotionButton>
+                <MotionButton variant={tier.popular ? 'primary' : 'secondary'} className="w-full" onClick={() => router.push('/auth/signup')}>{tier.cta}</MotionButton>
               </div>
             ))}
           </div>
@@ -259,8 +261,8 @@ export default function LandingPage() {
           <h2 className="text-4xl md:text-6xl font-bold text-[#1C1C1E] mb-6">Ready to Transform Your Life?</h2>
           <p className="text-xl md:text-2xl text-[#1C1C1E]/70 mb-12 max-w-2xl mx-auto">Join 50,000+ Indians who are already achieving their fitness goals with Fitsense</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <MotionButton variant="primary" size="lg">Start Free Trial →</MotionButton>
-            <MotionButton variant="secondary" size="lg">Watch Demo</MotionButton>
+            <MotionButton variant="primary" size="lg" onClick={() => router.push('/auth/signup')}>Start Free Trial →</MotionButton>
+            <MotionButton variant="secondary" size="lg" onClick={() => alert('🎥 Watch Demo\n\nSee how Fitsense helps you:\n• Track workouts & progress\n• Get personalized meal plans\n• Connect with trainers\n• Achieve your fitness goals\n\nDemo video coming soon!')}>Watch Demo</MotionButton>
           </div>
           <p className="text-[#1C1C1E]/50 mt-8">No credit card required • 7-day free trial • Cancel anytime</p>
         </div>
