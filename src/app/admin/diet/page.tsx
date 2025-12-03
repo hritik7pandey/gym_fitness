@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { BottomNav } from '@/components/navigation/BottomNav';
 
 interface Meal {
   id: string;
@@ -597,6 +598,9 @@ export default function AdminDietPage() {
           <li>Click &quot;Create & Assign Plan&quot; to save and assign the diet plan to the member</li>
         </ol>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav />
     </section>
   );
 }

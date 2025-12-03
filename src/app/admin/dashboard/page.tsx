@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import { BottomNav } from '@/components/navigation/BottomNav';
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -232,6 +233,9 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav />
     </div>
   );
 }

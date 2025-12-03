@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import FluentButton from '../../../components/ui/FluentButton';
+import { BottomNav } from '@/components/navigation/BottomNav';
 
 interface Workout {
   id: string;
@@ -323,6 +324,9 @@ export default function AdminWorkoutsPage() {
           ))}
         </div>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { BottomNav } from '@/components/navigation/BottomNav';
 import { motion } from '@/lib/motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -288,6 +289,9 @@ export default function AdminAnnouncementsPage() {
           </div>
         )}
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav />
     </div>
   );
 }

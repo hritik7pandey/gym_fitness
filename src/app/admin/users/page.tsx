@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion } from '@/lib/motion';
+import { BottomNav } from '@/components/navigation/BottomNav';
 
 interface User {
   id: string;
@@ -432,6 +433,9 @@ export default function AdminUsersPage() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav />
     </section>
   );
 }
