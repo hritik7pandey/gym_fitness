@@ -43,19 +43,24 @@ export async function POST(req: NextRequest) {
     // Update membership
     user.membershipType = membershipType;
     
+    // Set membership start date if not already set
+    if (!user.membershipStartDate) {
+      user.membershipStartDate = new Date();
+    }
+    
     // Extend expiry by 30 days from now (or from current expiry if still active)
     const now = new Date();
-    const currentExpiry = user.membershipExpiry ? new Date(user.membershipExpiry) : now;
+    const currentExpiry = user.membershipEndDate ? new Date(user.membershipEndDate) : now;
     const newExpiry = currentExpiry > now ? currentExpiry : now;
     newExpiry.setDate(newExpiry.getDate() + 30);
-    user.membershipExpiry = newExpiry;
+    user.membershipEndDate = newExpiry;
 
     await user.save();
 
     return NextResponse.json({
       message: 'Membership updated successfully',
       membershipType: user.membershipType,
-      membershipExpiry: user.membershipExpiry
+      membershipEndDate: user.membershipEndDate
     });
 
   } catch (error) {
