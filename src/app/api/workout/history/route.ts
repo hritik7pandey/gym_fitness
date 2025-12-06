@@ -48,9 +48,9 @@ export async function GET(request: NextRequest) {
 // Log workout completion
 export async function POST(request: NextRequest) {
   try {
-    const authResult = authMiddleware(request);
+    const authResult = await hubAccessMiddleware(request);
     if ('error' in authResult) {
-      return NextResponse.json({ success: false, message: authResult.error }, { status: 401 });
+      return NextResponse.json({ success: false, message: authResult.error }, { status: 403 });
     }
 
     const userId = authResult.userId;
