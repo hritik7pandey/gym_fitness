@@ -240,7 +240,6 @@ export default function PlansPage() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
                     className="text-center mt-12"
-                    className="text-center mt-12"
                 >
                     <button
                         onClick={() => router.push('/')}
