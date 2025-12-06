@@ -385,9 +385,8 @@ export default function UserDashboard() {
 
       {showAnnouncementCenter && (
         <AnnouncementCenter
-          announcements={announcements}
+          isOpen={showAnnouncementCenter}
           onClose={() => setShowAnnouncementCenter(false)}
-          onRefresh={fetchAnnouncements}
         />
       )}
     </div>
