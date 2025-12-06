@@ -263,39 +263,58 @@ export default function UserDashboard() {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Water Intake - Free for all users */}
+          {/* Water Intake - Premium Hub Access Required */}
           <AnimatedGlassCard delay={0.3}>
             <div className="p-6">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <span>💧</span>
                 Water Intake
               </h3>
-              <div className="mb-4">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-300">{waterIntake}ml</span>
-                  <span className="text-gray-300">{waterGoal}ml</span>
+              {hasHubAccess ? (
+                <>
+                  <div className="mb-4">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-gray-300">{waterIntake}ml</span>
+                      <span className="text-gray-300">{waterGoal}ml</span>
+                    </div>
+                    <div className="h-3 bg-white/10 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-500"
+                        style={{ width: `${(waterIntake / waterGoal) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => addWater(250)}
+                      className="flex-1 px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition-all"
+                    >
+                      +250ml
+                    </button>
+                    <button
+                      onClick={() => addWater(500)}
+                      className="flex-1 px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition-all"
+                    >
+                      +500ml
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <div className="text-5xl mb-3">🔒</div>
+                  <p className="text-gray-300 mb-4 text-sm">
+                    Water tracking requires<br />
+                    <strong className="text-white">Premium Hub Access</strong>
+                  </p>
+                  <MotionButton
+                    variant="primary"
+                    onClick={() => router.push('/settings?tab=membership')}
+                    className="w-full"
+                  >
+                    Upgrade - ₹199/month
+                  </MotionButton>
                 </div>
-                <div className="h-3 bg-white/10 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-500"
-                    style={{ width: `${(waterIntake / waterGoal) * 100}%` }}
-                  />
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => addWater(250)}
-                  className="flex-1 px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition-all"
-                >
-                  +250ml
-                </button>
-                <button
-                  onClick={() => addWater(500)}
-                  className="flex-1 px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition-all"
-                >
-                  +500ml
-                </button>
-              </div>
+              )}
             </div>
           </AnimatedGlassCard>
 

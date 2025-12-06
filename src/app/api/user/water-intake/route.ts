@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
-import { authMiddleware } from '@/lib/auth-middleware';
+import { hubAccessMiddleware } from '@/lib/auth-middleware';
 import mongoose from 'mongoose';
 
 // Water intake tracking with daily reset
@@ -16,9 +16,9 @@ const WaterLog = mongoose.models.WaterLog || mongoose.model('WaterLog', WaterLog
 // POST /api/user/water-intake
 export async function POST(request: NextRequest) {
   try {
-    const decoded = authMiddleware(request);
+    const decoded = await hubAccessMiddleware(request);
     if ('error' in decoded) {
-      return NextResponse.json({ success: false, message: decoded.error }, { status: 401 });
+      return NextResponse.json({ success: false, message: decoded.error }, { status: 403 });
     }
 
     await dbConnect();
@@ -78,9 +78,9 @@ export async function POST(request: NextRequest) {
 // GET /api/user/water-intake
 export async function GET(request: NextRequest) {
   try {
-    const decoded = authMiddleware(request);
+    const decoded = await hubAccessMiddleware(request);
     if ('error' in decoded) {
-      return NextResponse.json({ success: false, message: decoded.error }, { status: 401 });
+      return NextResponse.json({ success: false, message: decoded.error }, { status: 403 });
     }
 
     await dbConnect();
