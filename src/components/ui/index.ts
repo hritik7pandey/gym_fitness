@@ -5,6 +5,6 @@ export { Input } from './Input';
 export { Badge } from './Badge';
 export { default as FloatingContactButton } from './FloatingContactButton';
 export { HubAccessGuard } from './HubAccessGuard';
-export { GlassCard } from './GlassCard';
-export { FluentButton } from './FluentButton';
+export { default as GlassCard } from './GlassCard';
+export { default as FluentButton } from './FluentButton';
 
