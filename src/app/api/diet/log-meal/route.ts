@@ -98,9 +98,9 @@ export async function POST(request: NextRequest) {
 // GET /api/diet/log-meal - Get today's logged meals
 export async function GET(request: NextRequest) {
   try {
-    const decoded = authMiddleware(request);
+    const decoded = await hubAccessMiddleware(request);
     if ('error' in decoded) {
-      return NextResponse.json({ success: false, message: decoded.error }, { status: 401 });
+      return NextResponse.json({ success: false, message: decoded.error }, { status: 403 });
     }
 
     await dbConnect();
