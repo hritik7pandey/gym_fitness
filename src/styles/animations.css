@@ -1,0 +1,129 @@
+/* iOS-26 Minimal Animations - Optimized for Low-End Devices */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(122, 167, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(122, 167, 255, 0.25);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Utility Classes - Minimal and Fast */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease forwards;
+}
+
+/* Spring Physics - Simplified and Faster */
+.spring-smooth {
+  transition: all 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* iOS Button Press - Optimized */
+.ios-button-press {
+  transition: transform 0.08s ease;
+}
+
+.ios-button-press:active {
+  transform: scale(0.98);
+}
+
+/* Blur Effects - Reduced for Performance */
+.dynamic-blur {
+  backdrop-filter: blur(30px) saturate(140%);
+  -webkit-backdrop-filter: blur(30px) saturate(140%);
+}
+
+/* Stagger Animation Delays - Reduced */
+.stagger-1 { animation-delay: 0.03s; }
+.stagger-2 { animation-delay: 0.06s; }
+.stagger-3 { animation-delay: 0.09s; }
+.stagger-4 { animation-delay: 0.12s; }
+.stagger-5 { animation-delay: 0.15s; }
+.stagger-6 { animation-delay: 0.18s; }
+
+/* Scroll-triggered - Simplified */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.reveal.active {
+  animation: slide-up-fade 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01s !important;
+  }
+}
