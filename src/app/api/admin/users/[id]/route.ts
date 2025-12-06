@@ -46,7 +46,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         membershipType: user.membershipType,
         membershipStartDate: user.membershipStartDate,
         membershipEndDate: user.membershipEndDate,
-        membershipDuration: user.membershipDuration,
         attendanceStreak: user.attendanceStreak,
         waterIntakeGoal: user.waterIntakeGoal,
         workoutPlan: user.workoutPlanId,
