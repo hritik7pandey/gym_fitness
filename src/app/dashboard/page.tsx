@@ -373,9 +373,13 @@ export default function UserDashboard() {
 
       {showTimer && activeWorkout && (
         <WorkoutTimer
-          workout={activeWorkout}
-          onComplete={completeWorkout}
-          onClose={() => setShowTimer(false)}
+          isOpen={showTimer}
+          workoutName={activeWorkout.name}
+          duration={activeWorkout.duration}
+          onClose={() => {
+            setShowTimer(false);
+            completeWorkout();
+          }}
         />
       )}
 
